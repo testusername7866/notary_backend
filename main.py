@@ -11,10 +11,13 @@ logging.basicConfig(level=logging.DEBUG)
 # If Tesseract isn't in PATH, set it:
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-# ✅ Health Check Route
-@app.get("/")
-def home():
-    return {"message": "Backend is running successfully!"}
+@app.get("/")  # Root route to check if backend is live
+def root():
+    return {"message": "Notary Backend is Live"}
+
+@app.get("/health")  # Health check route
+def health_check():
+    return {"status": "ok"}
 
 @app.post("/extract_text/")
 async def extract_text(file: UploadFile = File(...)):
