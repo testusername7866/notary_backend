@@ -19,7 +19,7 @@ app.add_middleware(
 # ✅ Set Tesseract Path
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-# ✅ Set Poppler Path (Ensure it’s correct)
+# ✅ Set Poppler Path
 POPPLER_PATH = r"C:\Poppler\poppler-24.08.0\Library\bin"
 
 # ✅ Health check route
@@ -34,7 +34,7 @@ async def extract_text(file: UploadFile = File(...)):
         # Read uploaded file
         file_bytes = await file.read()
 
-        # ✅ Convert PDF to images
+        # ✅ Convert PDF to images using Poppler
         images = convert_from_bytes(file_bytes, poppler_path=POPPLER_PATH)
 
         if not images:
