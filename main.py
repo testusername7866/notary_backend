@@ -6,12 +6,12 @@ from PIL import Image
 
 app = FastAPI()
 
-# Enable CORS for your frontend
+# Enable CORS to allow frontend communication
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins (change to frontend URL if needed)
+    allow_origins=["*"],  # Allow all origins (Change this to your frontend URL later)
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
     allow_headers=["*"],
 )
 
@@ -19,7 +19,7 @@ app.add_middleware(
 def read_root():
     return {"message": "Backend is working!"}
 
-@app.post("/upload/")
+@app.post("/upload/")  # This ensures POST requests work
 async def upload_file(file: UploadFile = File(...)):
     try:
         file_bytes = await file.read()
